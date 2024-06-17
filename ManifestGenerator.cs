@@ -11,7 +11,8 @@ public static class ManifestGenerator
 	public const string MANIFEST_FILEPATH = "manifest.json";
 	public const bool ALLOW_NEW_FILE = true; // enable for first run
 	public const string BUILDS_PATH = "/home/ss14/space-station-14/release/";
-	public const string BUILDS_URL = "https://cdn.blepstation.com/blep-builds/";
+	public const string BUILDS_URL_CLIENT = "https://cdn.blepstation.com/blep-builds/";
+	public const string BUILDS_URL_SERVER = "https://blepstation.com/blep-builds/";
 
 	public static void Main(string[] args)
 	{
@@ -68,7 +69,7 @@ public static class ManifestGenerator
 
 		// Client build
 		var jsonClient = new JObject();
-		jsonClient["url"] = BUILDS_URL + targetSHA + '/' + "SS14.Client.zip";
+		jsonClient["url"] = BUILDS_URL_CLIENT + targetSHA + '/' + "SS14.Client.zip";
 		jsonClient["sha256"] = SHA256CheckSum(PathForBuild(targetSHA) + "SS14.Client.zip");
 		json["client"] = jsonClient;
 
@@ -84,7 +85,7 @@ public static class ManifestGenerator
 
 				var platformJson = new JObject();
 				var fileInfo = new FileInfo(path);
-				platformJson["url"] = BUILDS_URL + targetSHA + '/' + fileInfo.Name;
+				platformJson["url"] = BUILDS_URL_SERVER + targetSHA + '/' + fileInfo.Name;
 				platformJson["sha256"] = SHA256CheckSum(path);
 				jsonServer[platform] = platformJson; 
 			}
